@@ -3,12 +3,13 @@ export function addToCart(cart, product, qty) {
     return { ok: false, reason: 'qty-invalid', cart }
   }
 
-  // BUG 2 (sengaja): stok tidak diperiksa
+  // FIX langkah-2: tolak jika qty akhir melebihi stok
   const existing = cart.find((line) => line.productId === product.id)
-  if (existing) {
-    existing.qty += qty
-  } else {
-    cart.push({ productId: product.id, qty, price: product.price })
+  const finalQty = existing ? existing.qty + qty : qty
+  if (finalQty > product.stock) {
+    return { ok: false, reason: 'exceeds-stock', cart }
   }
+  if (existing) existing.qty = finalQty
+  else cart.push({ productId: product.id, qty, price: product.price })
   return { ok: true, cart }
 }
