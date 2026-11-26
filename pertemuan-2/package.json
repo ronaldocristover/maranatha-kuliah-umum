@@ -1,0 +1,23 @@
+{
+  "name": "pertemuan-2-lecture-demo",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "description": "Toko Kopi Kampus — Demo kuliah Pertemuan 2 (functional testing, unit + API + E2E)",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "vitest run",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "express": "^5.0.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.48.0",
+    "vite": "^6.4.0",
+    "vitest": "^2.1.5"
+  }
+}
