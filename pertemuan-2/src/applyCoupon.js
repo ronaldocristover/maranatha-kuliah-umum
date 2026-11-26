@@ -10,8 +10,8 @@ export function applyCoupon(subtotal, code, now = new Date()) {
   if (code !== 'KOPI20') return { accepted: false, discount: 0 }
   if (now > KOPI20.expiresAt) return { accepted: false, discount: 0 }
 
-  // BUG 1 (sengaja): seharusnya >= pada batas minimum
-  if (subtotal > KOPI20.minSubtotal) {
+  // FIX langkah-1: batas minimum inklusif
+  if (subtotal >= KOPI20.minSubtotal) {
     const discount = Math.min(Math.floor(subtotal * KOPI20.rate), KOPI20.cap)
     return { accepted: true, discount }
   }
