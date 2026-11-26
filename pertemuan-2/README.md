@@ -79,3 +79,22 @@ pertemuan-2/
   playwright.config.js
   package.json / package-lock.json
 ```
+
+## Langkah demo dengan tag
+
+Gunakan tag berikut untuk melompat ke setiap langkah:
+
+- p2-langkah-0-semua-bug — Unit/API: 3 gagal; E2E gagal (kupon 100.000 ditolak).
+- p2-langkah-1-fix-kupon — Unit kupon hijau; stok/API masih gagal; E2E gagal (total 120.000).
+- p2-langkah-2-fix-stok — Unit+API hijau; E2E gagal (total 120.000).
+- p2-langkah-3-fix-total — Semua tes hijau.
+
+Perintah umum di tiap langkah:
+
+```bash
+git checkout <tag>
+npx vitest run
+npx playwright test e2e/checkout-kupon.spec.js --project=chromium --headed
+```
+
+Catatan: jika ada server lama yang masih berjalan, Playwright akan memakainya (konfigurasi reuseExistingServer). Pastikan tidak ada server lokal berjalan sebelum menjalankan tes.
