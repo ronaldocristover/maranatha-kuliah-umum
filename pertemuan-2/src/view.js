@@ -7,8 +7,8 @@ export function renderCartPage(store) {
   const subtotal = cart.reduce((s, line) => s + line.price * line.qty, 0)
   const discount = coupon?.accepted ? coupon.discount : 0
   const shipping = subtotal >= 150_000 ? 0 : 20_000
-  // BUG 3: total lupa dikurangi potongan
-  const total = subtotal + shipping
+  // Perbaikan bug 3: total = subtotal - discount + shipping
+  const total = subtotal - discount + shipping
 
   const productButtons = products
     .map(
@@ -47,8 +47,8 @@ export function renderReceipt(store) {
   const subtotal = cart.reduce((s, line) => s + line.price * line.qty, 0)
   const discount = coupon?.accepted ? coupon.discount : 0
   const shipping = subtotal >= 150_000 ? 0 : 20_000
-  // BUG 3 juga di struk
-  const total = subtotal + shipping
+  // Perbaikan bug 3 di struk
+  const total = subtotal - discount + shipping
   return `<!doctype html>
 <html lang="id">
   <head><meta charset="utf-8"><title>Struk</title></head>
